@@ -8,6 +8,8 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
 
+        int writingLastId = 0;  // 가장 마지막 명언글의 번호
+
         outer:
         while (true) {
             System.out.print("명령) ");
@@ -19,7 +21,8 @@ public class App {
                     String content = sc.nextLine().trim();   // 명언 입력받기
                     System.out.print("작가 : ");
                     String author = sc.nextLine().trim();   // 작가 입력받기
-                    System.out.println("1번 명언이 입력되었습니다.");
+                    int id = ++writingLastId;   // 명언 글 번호 1 증가
+                    System.out.printf("%d번 명언이 입력되었습니다.\n", id);
                     break;
                 case "종료":
                     break outer ; // outer가 붙은 반복문을 break
