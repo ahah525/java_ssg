@@ -29,7 +29,7 @@ public class App {
                     System.out.printf("%d번 명언이 입력되었습니다.\n", id);
                     break;
                 case "종료":
-                    break outer ; // outer가 붙은 반복문을 break
+                    break outer; // outer가 붙은 반복문을 break
             }
         }
         sc.close();
