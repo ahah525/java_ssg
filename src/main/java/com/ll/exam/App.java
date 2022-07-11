@@ -16,7 +16,8 @@ public class App {
             System.out.print("명령) ");
             String cmd = sc.nextLine().trim();  // 앞뒤 공백 제거
 
-            switch (cmd) {
+            Rq rq = new Rq(cmd);    // 명령어
+            switch (rq.getPath()) {
                 case "등록":
                     System.out.print("명언 : ");
                     String content = sc.nextLine().trim();   // 명언 입력받기
@@ -36,6 +37,28 @@ public class App {
                     for (int i = wiseSayings.size() - 1; i >= 0; i--) {
                         WiseSaying ws = wiseSayings.get(i);
                         System.out.printf("%d / %s / %s\n", ws.id, ws.author, ws.content);
+                    }
+                    break;
+                case "삭제":
+                    int paramId = rq.getIntParam("id", 0);  // id 파라미터 값
+                    // 0이 반환되었다는 것은 url에 id가 입력되지 았으므로 다시 입력받기
+                    if(paramId == 0) {
+                        System.out.println("id를 입력해주세요.");
+                        continue;
+                    }
+                    boolean isRemove = false;     // 삭제할 명언
+                    for(WiseSaying ws : wiseSayings) {
+                        // 명언 ArrayList에 해당 id가 있으면 삭제
+                        if(ws.id == paramId) {
+                            wiseSayings.remove(ws); // 명언 삭제
+                            System.out.printf("%d번 명언이 삭제되었습니다.\n", paramId);
+                            isRemove = true;
+                            break;
+                        }
+                    }
+                    // 명언을 삭제하지 않았으면
+                    if(!isRemove) {
+                        System.out.printf("%d번 명언은 존재하지 않습니다..\n", paramId);
                     }
                     break;
                 case "종료":
