@@ -9,6 +9,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {
     @Test
+    public void Rq__getIntParam() {
+        Rq rq = new Rq("삭제?id=1");
+        int id = rq.getIntParam("id", 0);
+
+        assertEquals(1, id);    // id 값이 1이 맞는지 검증
+    }
+
+    @Test
+    public void Rq__getIntParam__2() {
+        Rq rq = new Rq("검색?id=10&no=1");
+        int id = rq.getIntParam("id", 0);
+        int no = rq.getIntParam("no", 0);
+
+        assertEquals(10, id);    // id 값이 10이 맞는지 검증
+        assertEquals(1, no);    // no 값이 1이 맞는지 검증
+    }
+    @Test
     public void 테스트_실험() {
         int rs = 10 + 20;
         assertEquals(30, rs);
