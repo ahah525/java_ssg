@@ -19,5 +19,4 @@ public class WiseSaying {
                 ", author='" + author + '\'' +
                 '}';
     }
-
 }

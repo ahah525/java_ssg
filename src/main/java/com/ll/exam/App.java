@@ -22,7 +22,6 @@ public class App {
         while (true) {
             System.out.print("명령) ");
             String cmd = sc.nextLine().trim();  // 앞뒤 공백 제거
-
             Rq rq = new Rq(cmd);    // 명령어
             switch (rq.getPath()) {
                 case "등록":
@@ -73,25 +72,18 @@ public class App {
             System.out.println("id를 입력해주세요.");
             return;
         }
-        boolean isUpdate = false;     // 수정할 명언
-        for(WiseSaying ws : wiseSayings) {
-            // 명언 ArrayList에 해당 id가 있으면 수정
-            if(ws.id == updateId) {
-                System.out.printf("%d번 명언을 수정합니다.\n", updateId);
-                System.out.printf("기존 명언 : %s\n", ws.content);
-                System.out.print("새 명언 : ");
-                // 명언 수정
-                ws.content = sc.nextLine();
-                System.out.printf("%d번 명언이 수정되었습니다.\n", updateId);
-                isUpdate = true;
-                break;
-            }
-        }
-        // 해당 id가 없으면
-        if(!isUpdate) {
+        WiseSaying foundWs = findById(updateId);
+        // 수정할 명언 id가 없으면 종료
+        if(foundWs == null) {
             System.out.printf("%d번 명언은 존재하지 않습니다..\n", updateId);
             return;
         }
+        System.out.printf("%d번 명언을 수정합니다.\n", updateId);
+        System.out.printf("기존 명언 : %s\n", foundWs.content);
+        System.out.print("새 명언 : ");
+        // 명언 수정
+        foundWs.content = sc.nextLine();
+        System.out.printf("%d번 명언이 수정되었습니다.\n", updateId);
     }
 
     public void remove(Rq rq) {
@@ -101,20 +93,23 @@ public class App {
             System.out.println("id를 입력해주세요.");
             return;
         }
-        boolean isRemove = false;     // 삭제할 명언
-        for(WiseSaying ws : wiseSayings) {
-            // 명언 ArrayList에 해당 id가 있으면 삭제
-            if(ws.id == deleteId) {
-                wiseSayings.remove(ws); // 명언 삭제
-                System.out.printf("%d번 명언이 삭제되었습니다.\n", deleteId);
-                isRemove = true;
-                break;
-            }
-        }
-        // 명언을 삭제하지 않았으면
-        if(!isRemove) {
+        WiseSaying foundWs = findById(deleteId); // 해당 id의 명언
+        // 삭제할 명언 id가 없으면 종료
+        if(foundWs == null) {
             System.out.printf("%d번 명언은 존재하지 않습니다..\n", deleteId);
             return;
         }
+        wiseSayings.remove(foundWs); // 명언 삭제
+        System.out.printf("%d번 명언이 삭제되었습니다.\n", deleteId);
+    }
+
+    public WiseSaying findById(int paramId) {
+        for(WiseSaying ws : wiseSayings) {
+            // 명언 ArrayList에 해당 id가 있으면 반환
+            if(ws.id == paramId) {
+                return ws;
+            }
+        }
+        return null;
     }
 }
