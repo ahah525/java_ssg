@@ -7,7 +7,7 @@ public class Rq {
         this.url =  url;
     }
 
-    // 파라미터에 해당하는 값 반환
+    // url의 파라미터에 해당하는 값 반환
     public int getIntParam(String paramName, int defaultValue) {
         String[] urlBits = url.split("\\?", 2); // ? 기준으로 2개로 분리
         urlBits = urlBits[1].split("&"); // &기준으로 분리
@@ -22,5 +22,11 @@ public class Rq {
             }
         }
         return defaultValue;
+    }
+
+    // url의 Path를 반환
+    public String getPath() {
+        String[] urlBits = url.split("\\?", 2); // ? 기준으로 2개로 분리
+        return urlBits[0];  // ? 앞에 있는 값이 path
     }
 }

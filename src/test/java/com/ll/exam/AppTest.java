@@ -25,6 +25,15 @@ public class AppTest {
         assertEquals(10, id);    // id 값이 10이 맞는지 검증
         assertEquals(1, no);    // no 값이 1이 맞는지 검증
     }
+
+    @Test
+    public void Rq__getPath() {
+        Rq rq = new Rq("삭제?id=1");
+        String path = rq.getPath();
+
+        assertEquals("삭제", path);   // path가 삭제가 맞는지 검증
+    }
+
     @Test
     public void 테스트_실험() {
         int rs = 10 + 20;
