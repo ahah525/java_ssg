@@ -9,6 +9,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppTest {
     @Test
+    public void 파일_생성() {
+        Util.mkdir("test_data");
+        Util.saveToFile("test_data/1.json", "내용");
+    }
+
+//    @Test
+//    public void 파일에_저장된_내용_가져오기() {
+//        Util.mkdir("test_data");
+//        Util.saveToFile("test_data/1.json", "내용");
+//        String body = Util.getFromFile("test_data/1.json");
+//        System.out.println("body = " + body);
+//        //assertEquals("내용", result);
+//    }
+
+    @Test
     public void Rq__getIntParam() {
         Rq rq = new Rq("삭제?id=1");
         int id = rq.getIntParam("id", 0);
