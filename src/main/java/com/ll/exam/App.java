@@ -78,11 +78,13 @@ public class App {
             System.out.printf("%d번 명언은 존재하지 않습니다..\n", updateId);
             return;
         }
-        System.out.printf("%d번 명언을 수정합니다.\n", updateId);
-        System.out.printf("기존 명언 : %s\n", foundWs.content);
-        System.out.print("새 명언 : ");
-        // 명언 수정
+        // 명언, 작가 수정
+        System.out.printf("명언(기존) : %s\n", foundWs.content);
+        System.out.print("명언 : ");
         foundWs.content = sc.nextLine();
+        System.out.printf("작가(기존) : %s\n", foundWs.author);
+        System.out.print("명언 : ");
+        foundWs.author = sc.nextLine();
         System.out.printf("%d번 명언이 수정되었습니다.\n", updateId);
     }
 
